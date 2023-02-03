@@ -3,6 +3,7 @@ document.getElementById("start").addEventListener("click",function(){
     document.getElementById("start-area").style.display = "none"
     document.getElementById("quiz-area").style.display = "block"
     displayQuestion()
+    countdown();
 })
 var question = [
     {
@@ -28,6 +29,7 @@ function displayQuestion(){
     document.getElementById("answer-2").innerText = question[questionIndex].choices[1]
     document.getElementById("answer-3").innerText = question[questionIndex].choices[2]
     document.getElementById("answer-4").innerText = question[questionIndex].choices[3]
+    
 }
 document.getElementById("quiz-area").addEventListener("click", function(event){
 if(event.target.nodeName === "BUTTON"){
@@ -40,34 +42,38 @@ if(event.target.nodeName === "BUTTON"){
         timeLeft = timeLeft-10
         console.log("incorrect")
     }
+   
     questionIndex++
     displayQuestion()
-}    
+    }  
+   
 })
+
 
 var timerEl = document.getElementById('countdown');
 
-var startButton = document.getElementById('start').addEventListener(
-    'click', countdown
-)
 
 function countdown(){
 
-var msgInterval = setInterval(function () {
+var timerInterval = setInterval(function () {
     
     if (timeLeft > 1){
         timerEl.textContent = timeLeft + ' time left';
         timeLeft--;
-    } else if (timeLeft === 1) {
-        timerEl.textContent = timeLeft + ' time left';
-        timeLeft--;
-    } else{
-        timerEl.textContent = '';
-        clearInterval(timeInterval);
-        displayMessage();
+    }else{
+        clearInterval(timerInterval);
+        timerEl.textContent = "";
+        // function displayInital(
+        document.getElementById("quiz-area").innerHTML = `<h1>${timeLeft}</h1>`
+        // document.getElementById("done").style.display = "block"
+        // )
+        console.log("done")
     }
+    
 console.log(countdown)
   }, 1000);
 }
 
-countdown();
+
+
+
