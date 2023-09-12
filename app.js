@@ -42,10 +42,20 @@ if(event.target.nodeName === "BUTTON"){
         timeLeft = timeLeft-10
         console.log("incorrect")
     }
-   
+   if((questionIndex +1) < question.length){
     questionIndex++
     displayQuestion()
+   }else{
+    console.log("end quiz")
+    // end game function then add it to the else 
+
+   }
+   
+
+    // if statement to see if question exists
+    // else display final results function time left and how many correct 
     }  
+    
    
 })
 
@@ -68,8 +78,14 @@ var timerInterval = setInterval(function () {
         // document.getElementById("done").style.display = "block"
         // )
         console.log("done")
+            if(secondsLeft === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      // Calls function to create and append image
+    }
     }
     
+
 console.log(countdown)
   }, 1000);
 }
