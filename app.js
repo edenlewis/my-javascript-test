@@ -24,13 +24,20 @@ var question = [
 ]
 var questionIndex = 0
 function displayQuestion(){
+    if(questionIndex < question.length){
     document.getElementById("question").innerText = question[questionIndex].question
     document.getElementById("answer-1").innerText = question[questionIndex].choices[0]
     document.getElementById("answer-2").innerText = question[questionIndex].choices[1]
     document.getElementById("answer-3").innerText = question[questionIndex].choices[2]
     document.getElementById("answer-4").innerText = question[questionIndex].choices[3]
-    
+    }else{
+        endGame()
+        console.log("hit")
+    }
+
 }
+var playerScore = 0
+
 document.getElementById("quiz-area").addEventListener("click", function(event){
 if(event.target.nodeName === "BUTTON"){
     console.log(event)
@@ -38,15 +45,17 @@ if(event.target.nodeName === "BUTTON"){
     var correctChoice = question[questionIndex].answer
     if(userChoice === correctChoice){
         console.log("correct")
+        playerScore = playerScore+1
     } else{
         timeLeft = timeLeft-10
         console.log("incorrect")
     }
-   if((questionIndex +1) < question.length){
+   if((questionIndex +1) <= question.length){
     questionIndex++
     displayQuestion()
    }else{
     console.log("end quiz")
+    console.log("playerScore", playerScore)
     // end game function then add it to the else 
 
    }
@@ -78,7 +87,7 @@ var timerInterval = setInterval(function () {
         // document.getElementById("done").style.display = "block"
         // )
         console.log("done")
-            if(secondsLeft === 0) {
+            if(secondsLeft < 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       // Calls function to create and append image
@@ -90,6 +99,9 @@ console.log(countdown)
   }, 1000);
 }
 
-
-
-
+function endGame(){
+    // clearInterval(timerInterval);
+    timerEl.textContent = "";
+    secondsLeft = 0
+    alert(`your score is ${playerScore}`)
+}
